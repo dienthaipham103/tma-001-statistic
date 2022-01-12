@@ -47,7 +47,7 @@ const options = {
         }
    }
 };
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Decmeber', 'December'];
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const meta_data = [
     {
         name: 'website',
