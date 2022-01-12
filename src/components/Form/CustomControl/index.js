@@ -1,9 +1,11 @@
 import { Controller } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import './CustomControl.css';
+import CustomTextField from '../CustomTextField';
+import CustomSelect from '../CustomSelect';
 
 const CustomControl = (props) => {
-    const {name, control, defaultValue, label, limitProps} = props;
+    const {name, control, defaultValue, label, type } = props;
     return (
         <div className="controller">
             <Controller 
@@ -11,19 +13,26 @@ const CustomControl = (props) => {
                 control={control}
                 defaultValue={defaultValue}
                 render={({ field: { onChange, value }, fieldState: { error } }) => (
-                    <TextField
-                        label={label}
-                        variant="outlined"
-                        type="number"
-                        size="small"
-                        InputProps={limitProps && {
-                            inputProps: limitProps
-                        }}
-                        value={value}
-                        onChange={onChange}
-                        error={!!error}
-                        helperText={error ? error.message : null}
-                    />
+                    <>
+                        {
+                            type === "text-field" ?
+                            <CustomTextField
+                                label={label}
+                                value={value}
+                                onChange={onChange}
+                                error={error}
+                            />
+                            :
+                            <CustomSelect
+                                label={label}
+                                value={value}
+                                onChange={onChange}
+                                error={error}
+                            />
+                        }
+                    </>
+                    
+                    
                 )}
                 rules={{required: 'This field is required'}}
             />

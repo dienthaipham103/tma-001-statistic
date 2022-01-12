@@ -1,16 +1,16 @@
 import { useForm } from 'react-hook-form';
-import { Button } from '@mui/material';
+import { Button, InputLabel, Select, MenuItem, FormControl } from '@mui/material';
+import { Controller } from 'react-hook-form';
 import CustomControl from './CustomControl';
 import { useDispatch } from 'react-redux';
 import { updateData } from '../Chart/chartSlice';
 import './Form.css';
 
 const fields = [
-    {name: 'website', label: 'Website', condition: {'min': 0}},
-    {name: 'app', label: 'App', condition: {'min': 0}},
-    {name: 'linux', label: 'Linux', condition: {'min': 0}},
-    {name: 'window', label: 'Window', condition: {'min': 0}},
-    {name: 'month', label: 'Month', condition: {'max': 12, 'min': 1}}
+    {name: 'website', label: 'Website'},
+    {name: 'app', label: 'App'},
+    {name: 'linux', label: 'Linux'},
+    {name: 'window', label: 'Window'},
 ]
 
 function Form() {
@@ -18,6 +18,7 @@ function Form() {
     const dispatch = useDispatch();
     const { handleSubmit, control, reset } = useForm();
     const onSubmit = (data) => {
+        console.log(data);
         Object.keys(data).forEach(k => {
             data[k] = parseInt(data[k])
         })
@@ -29,13 +30,21 @@ function Form() {
     return (
         <div className="form">
             <form onSubmit={handleSubmit(onSubmit)}>
+                <CustomControl 
+                    name="month"
+                    control={control}
+                    defaultValue=""
+                    label="Month"
+                    type="select"
+                />
+
                 {fields.map(info => (
                     <CustomControl 
                         name={info.name}
                         control={control}
                         defaultValue=""
                         label={info.label}
-                        limitProps={info.condition}
+                        type="text-field"
                     />
                 ))}
                 
